@@ -2,45 +2,80 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Search">
+<BaseLayout
+  title="Search"
+  description="Search articles and writing by Bryan Vold."
+>
+  <section class="search-page container">
 
-  <section class="container search-page">
+    <header class="search-header">
+      <p class="eyebrow">EXPLORE THE JOURNAL</p>
 
-    <h1>Search</h1>
+      <h1>Search</h1>
 
-    <p>
-      Search articles, ideas, and other writing.
-    </p>
+      <p>
+        Looking for something particular?
+        Search through my articles, ideas,
+        and observations.
+      </p>
+    </header>
 
-    <div id="search"></div>
+    <div class="search-container">
+      <pagefind-input
+        placeholder="Search the journal..."
+      ></pagefind-input>
+
+      <pagefind-summary></pagefind-summary>
+
+      <pagefind-results></pagefind-results>
+    </div>
 
   </section>
 
   <link
-    href="/pagefind/pagefind-ui.css"
     rel="stylesheet"
+    href="/pagefind/pagefind-component-ui.css"
   />
 
-  <script is:inline>
-    window.addEventListener("DOMContentLoaded", () => {
-      new PagefindUI({
-        element: "#search",
-        showSubResults: true
-      });
-    });
-  </script>
-
   <script
-    is:inline
-    src="/pagefind/pagefind-ui.js"
+    type="module"
+    src="/pagefind/pagefind-component-ui.js"
   ></script>
-
 </BaseLayout>
 
 <style>
   .search-page {
-    max-width: 800px;
-    padding-top: 3rem;
-    padding-bottom: 5rem;
+    max-width: 850px;
+    padding-top: 4rem;
+    padding-bottom: 6rem;
+  }
+
+  .search-header {
+    margin-bottom: 3rem;
+  }
+
+  .eyebrow {
+    color: var(--color-forest);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+  }
+
+  .search-header h1 {
+    margin: 0.5rem 0 1rem;
+  }
+
+  .search-header p {
+    max-width: 600px;
+    color: var(--color-muted);
+  }
+
+  .search-container {
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
+  }
+
+  .search-container pagefind-input {
+    display: block;
+    margin-bottom: 1.5rem;
   }
 </style>
