@@ -1,0 +1,19 @@
+siteName: "Bryan Vold"
+
+tagline: "Speculative Christian Fiction Writer"
+
+homepage:
+  eyebrow: "WELCOME"
+  heading: "Random thoughts on writing, discovery and observations."
+  introduction: >-
+    <i>The heart of man plans his way,
+    but the Lord establishes his steps.
+    <b>Proverbs 16:9</b> </i>
+
+features:
+  showBooks: true
+
+social:
+  instagram: "https://www.instagram.com/bryanvold/"
+  pinterest: "https://www.pinterest.com/bryanvold/"
+  facebook: "https://www.facebook.com/bryanvold/"

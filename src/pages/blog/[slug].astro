@@ -57,7 +57,7 @@ const { Content } = await render(post);
       <img
         class="featured-image"
         src={post.data.image}
-        alt=""
+        alt={post.data.imageAlt ?? ""}
       />
     )}
 

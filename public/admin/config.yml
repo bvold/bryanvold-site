@@ -47,6 +47,12 @@ collections:
         widget: "image"
         required: false
 
+      - label: "Image Alt Text"
+        name: "imageAlt"
+        widget: "string"
+        required: false
+        hint: "Briefly describe the image for readers using screen readers."
+
       - label: "Draft"
         name: "draft"
         widget: "boolean"

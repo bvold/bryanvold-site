@@ -7,13 +7,13 @@ export const siteConfig = {
     "The personal website and writing journal of Bryan Vold.",
 
   features: {
-    showBooks: false,
+    showBooks: true,
   },
 
   social: {
-    instagram: "",
-    pinterest: "",
-    facebook: "",
+    instagram: "https://www.instagram.com/bryanvold/",
+    pinterest: "https://www.pinterest.com/bryanvold/",
+    facebook: "https://www.facebook.com/bryanvold/",
   },
 };
 

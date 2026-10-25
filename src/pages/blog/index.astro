@@ -42,7 +42,7 @@ const posts = (
         {post.data.image && (
           <img
             src={post.data.image}
-            alt=""
+            alt={post.data.imageAlt ?? ""}
             loading="lazy"
           />
         )}

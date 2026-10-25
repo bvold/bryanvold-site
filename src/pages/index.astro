@@ -22,8 +22,9 @@ const posts = (
     <h1>Random thoughts on writing, discovery and observations.</h1>
 
     <p>
-      <i><b>Proverbs 16:9</b> The heart of man plans his way,
-    but the Lord establishes his steps.</i>
+    <i>The heart of man plans his way,
+    but the Lord establishes his steps.
+    <b>Proverbs 16:9</b> </i>
     </p>
 
     <a class="button" href="/blog/">
@@ -49,7 +50,7 @@ const posts = (
           {post.data.image && (
             <img
               src={post.data.image}
-              alt=""
+              alt={post.data.imageAlt ?? ""}
               loading="lazy"
             />
           )}
