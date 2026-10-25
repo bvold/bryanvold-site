@@ -1,5 +1,6 @@
 ---
 import { navigation } from "../config/site";
+import SearchModal from "./SearchModal.astro";
 
 const links = navigation.filter(
   (item) => item.enabled !== false
@@ -25,9 +26,9 @@ const links = navigation.filter(
       ))}
     </div>
 
-    <a class="search-link" href="/search/">
-      Search <span aria-hidden="true">⌕</span>
-    </a>
+    <div class="search-link">
+      <SearchModal />
+    </div>
 
   </div>
 </nav>
@@ -47,11 +48,13 @@ const links = navigation.filter(
     align-items: center;
     justify-content: center;
     position: relative;
+    width: 100%;
   }
 
   .desktop-links {
     display: flex;
-    gap: 2.5rem;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: center;
   }
 
   a {
@@ -66,8 +69,12 @@ const links = navigation.filter(
   }
 
   .search-link {
-    position: absolute;
-    right: 1rem;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+    padding-left: 2rem;
   }
 
   .mobile-menu {

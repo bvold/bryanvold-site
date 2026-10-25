@@ -27,6 +27,11 @@ const {
     <meta name="description" content={description} />
 
     <title>{title} | Bryan Vold</title>
+    <!-- Pagefind Component UI -->
+    <link
+      rel="stylesheet"
+      href="/pagefind/pagefind-component-ui.css"
+    />
   </head>
 
   <body>
@@ -37,5 +42,12 @@ const {
     </main>
 
     <Footer />
+
+    <!-- Pagefind Component UI -->
+    <script
+      is:inline
+      type="module"
+      src="/pagefind/pagefind-component-ui.js"
+  ></script>
   </body>
 </html>

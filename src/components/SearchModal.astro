@@ -1,0 +1,68 @@
+---
+/*
+ * SearchModal.astro
+ * Pagefind Component UI
+ */
+---
+
+<div class="search-modal-container">
+  <pagefind-modal-trigger
+    placeholder="Search"
+    hide-shortcut
+  ></pagefind-modal-trigger>
+
+  <pagefind-modal reset-on-close></pagefind-modal>
+</div>
+
+<style>
+  .search-modal-container {
+    display: flex;
+    align-items: center;
+  }
+
+  /*
+   * These variables style the Pagefind trigger.
+   * They are scoped to this container.
+   */
+  .search-modal-container {
+    --pf-text: #f7f4ec;
+    --pf-text-secondary: #f7f4ec;
+    --pf-text-muted: #f7f4ec;
+    --pf-background: transparent;
+    --pf-border: transparent;
+    --pf-border-focus: transparent;
+    --pf-hover: rgba(247, 244, 236, 0.08);
+    --pf-font: Georgia, "Times New Roman", serif;
+    --pf-border-radius: 0;
+    --pf-outline-focus: #f7f4ec;
+  }
+
+  pagefind-modal {
+    --pf-text: #233d2d;
+    --pf-text-secondary: #526357;
+    --pf-text-muted: #66756a;
+    --pf-background: #f7f4ec;
+    --pf-border: #d8d8ce;
+    --pf-border-focus: #233d2d;
+    --pf-hover: #eeece4;
+    --pf-font: Georgia, "Times New Roman", serif;
+    --pf-border-radius: 6px;
+    --pf-outline-focus: #233d2d;
+  }
+
+  pagefind-modal-trigger {
+    cursor: pointer;
+    line-height: 1.5;
+    transition: opacity 180ms ease;
+  }
+
+  pagefind-modal-trigger:hover {
+    opacity: 0.8;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    pagefind-modal-trigger {
+      transition: none;
+    }
+  }
+</style>

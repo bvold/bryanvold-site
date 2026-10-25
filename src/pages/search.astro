@@ -4,43 +4,45 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Search"
-  description="Search articles and writing by Bryan Vold."
+  description="Search the writing and articles of Bryan Vold."
 >
+
   <section class="search-page container">
 
     <header class="search-header">
-      <p class="eyebrow">EXPLORE THE JOURNAL</p>
+
+      <p class="eyebrow">
+        EXPLORE THE JOURNAL
+      </p>
 
       <h1>Search</h1>
 
-      <p>
-        Looking for something particular?
-        Search through my articles, ideas,
-        and observations.
+      <p class="introduction">
+        Search through my articles, observations,
+        and reflections.
       </p>
+
     </header>
 
-    <div class="search-container">
+    <div class="search-interface">
+
       <pagefind-input
-        placeholder="Search the journal..."
+        instance="full-page"
+        placeholder="What are you looking for?"
       ></pagefind-input>
 
-      <pagefind-summary></pagefind-summary>
+      <pagefind-summary
+        instance="full-page"
+      ></pagefind-summary>
 
-      <pagefind-results></pagefind-results>
+      <pagefind-results
+        instance="full-page"
+      ></pagefind-results>
+
     </div>
 
   </section>
 
-  <link
-    rel="stylesheet"
-    href="/pagefind/pagefind-component-ui.css"
-  />
-
-  <script
-    type="module"
-    src="/pagefind/pagefind-component-ui.js"
-  ></script>
 </BaseLayout>
 
 <style>
@@ -55,27 +57,34 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   }
 
   .eyebrow {
-    color: var(--color-forest);
     font-size: 0.75rem;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
+    color: var(--color-forest);
   }
 
   .search-header h1 {
     margin: 0.5rem 0 1rem;
+    color: var(--color-forest);
   }
 
-  .search-header p {
-    max-width: 600px;
+  .introduction {
+    font-size: 1.15rem;
     color: var(--color-muted);
+    max-width: 600px;
   }
 
-  .search-container {
-    border-top: 1px solid var(--color-border);
+  .search-interface {
     padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
   }
 
-  .search-container pagefind-input {
+  pagefind-input {
     display: block;
     margin-bottom: 1.5rem;
+  }
+
+  pagefind-summary {
+    display: block;
+    margin-bottom: 1rem;
   }
 </style>
