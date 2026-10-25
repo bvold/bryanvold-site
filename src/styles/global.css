@@ -1,0 +1,72 @@
+:root {
+  /* Brand colors */
+  --color-forest: #233d2d;
+  --color-forest-hover: #345640;
+
+  --color-cream: #f7f4ec;
+  --color-white: #ffffff;
+
+  --color-text: #242824;
+  --color-muted: #62675f;
+  --color-border: #e3e2dc;
+
+  /* Typography */
+  --font-heading: Georgia, "Times New Roman", serif;
+  --font-body: Georgia, "Times New Roman", serif;
+
+  /* Layout */
+  --content-width: 1120px;
+  --article-width: 720px;
+
+  /* Spacing */
+  --space-sm: 0.75rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+  --space-xl: 5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-white);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: min(
+    calc(100% - 2rem),
+    var(--content-width)
+  );
+  margin-inline: auto;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}

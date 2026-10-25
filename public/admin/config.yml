@@ -1,0 +1,57 @@
+backend:
+  name: turbo-github
+  turbo_site_id: 03204bc5-f4d3-486b-bc97-a71cc4167d9b
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+
+    slug: "{{slug}}"
+
+    extension: "md"
+    format: "frontmatter"
+
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+
+      - label: "Description"
+        name: "description"
+        widget: "text"
+
+      - label: "Publication Date"
+        name: "pubDate"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - "Ideas & Observations"
+          - "Writing Life"
+          - "Faith & Discovery"
+          - "Projects & Updates"
+
+      - label: "Featured Image"
+        name: "image"
+        widget: "image"
+        required: false
+
+      - label: "Draft"
+        name: "draft"
+        widget: "boolean"
+        default: false
+
+      - label: "Body"
+        name: "body"
+        widget: "markdown"

@@ -1,16 +1,157 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (
+  await getCollection("blog", ({ data }) => !data.draft)
+)
+  .sort(
+    (a, b) =>
+      b.data.pubDate.valueOf() -
+      a.data.pubDate.valueOf()
+  )
+  .slice(0, 6);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Home">
+
+  <section class="welcome container">
+
+    <p class="eyebrow">WELCOME</p>
+
+    <h1>Stories for a More Real World</h1>
+
+    <p>
+      Thoughts on faith, imagination, and the stories
+      that help us see reality more clearly.
+    </p>
+
+    <a class="button" href="/blog/">
+      Read the Blog →
+    </a>
+
+  </section>
+
+  <section class="recent container">
+
+    <div class="section-heading">
+      <h2>Latest Articles</h2>
+
+      <a href="/blog/">
+        View All Posts →
+      </a>
+    </div>
+
+    <div class="article-grid">
+      {posts.map((post) => (
+        <article>
+
+          {post.data.image && (
+            <img
+              src={post.data.image}
+              alt=""
+              loading="lazy"
+            />
+          )}
+
+          <p class="date">
+            {post.data.pubDate.toLocaleDateString(
+              "en-US",
+              { timeZone: "UTC" }
+            )}
+          </p>
+
+          <h3>
+            <a href={`/blog/${post.id}/`}>
+              {post.data.title}
+            </a>
+          </h3>
+
+          <p>{post.data.description}</p>
+
+          <a href={`/blog/${post.id}/`}>
+            Read More →
+          </a>
+
+        </article>
+      ))}
+    </div>
+
+  </section>
+
+</BaseLayout>
+
+<style>
+  .welcome {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .welcome h1 {
+    max-width: 650px;
+  }
+
+  .welcome > p:not(.eyebrow) {
+    max-width: 600px;
+    font-size: 1.25rem;
+  }
+
+  .eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+  }
+
+  .button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--color-forest);
+    text-decoration: none;
+    margin-top: 1rem;
+  }
+
+  .recent {
+    padding-bottom: 4rem;
+  }
+
+  .section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .article-grid article img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .article-grid article h3 {
+    font-size: 1.5rem;
+  }
+
+  .article-grid article h3 a {
+    text-decoration: none;
+  }
+
+  .date {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 800px) {
+    .article-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .welcome {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+  }
+</style>
