@@ -1,7 +1,6 @@
 ---
-title: "Now"
+title: Now
 ---
-
 A snapshot of what I'm writing, reading, listening to, and thinking about lately.
 
 ## Writing
@@ -10,7 +9,7 @@ I'm working on my first novel, a work of speculative Christian fiction. I'm curr
 
 ## Reading
 
-I'm reading my first murder mystery: *And Then There Were None* by Agatha Christie.
+[Reading List](/reading-list/)
 
 ## Living
 
