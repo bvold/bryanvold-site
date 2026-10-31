@@ -1,0 +1,26 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const page = await getEntry('pages', 'uses');
+
+if (!page) {
+  throw new Error('Content not found: uses.md');
+}
+
+const { Content } = await render(page);
+---
+
+<BaseLayout title={page.data.title}>
+  <section class="container page-content">
+    <h1>{page.data.title}</h1>
+    <Content />
+  </section>
+</BaseLayout>
+
+<style>
+  .page-content {
+    max-width: 720px;
+    padding-block: 4rem;
+  }
+</style>

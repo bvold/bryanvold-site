@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const books = await getCollection('books');
+const sections = [
+  { status: 'reading', heading: 'Currently Reading', tone: 'sage' },
+  { status: 'want', heading: 'Want to Read', tone: 'blue' },
+  { status: 'read', heading: 'Books I’ve Read', tone: 'cream' },
+] as const;
+const ratingLabel = (rating: number) => `${rating.toFixed(1).replace(/\.0$/, '')} / 5`;
+const ratingStars = (rating: number) => '★'.repeat(Math.floor(rating)) + (rating % 1 >= .5 ? '½' : '') + '☆'.repeat(5 - Math.ceil(rating));
+---
+<BaseLayout title="Reading List">
+  <div class="reading-page container">
+    <h1>Reading List</h1>
+    <p class="intro">A running record of books I’m reading, books on my radar, and a few impressions along the way.</p>
+    {sections.map(section => {
+      const items = books.filter(book => book.data.status === section.status)
+        .sort((a,b) => (a.data.order ?? 999) - (b.data.order ?? 999) || a.data.title.localeCompare(b.data.title));
+      return <section class={`book-section ${section.tone}`} aria-label={section.heading}>
+        <h2>{section.heading}</h2>
+        {items.length ? <ul class="book-list">
+          {items.map(book => <li class="book-item">
+            <div class="book-heading"><cite>{book.data.title}</cite><span class="separator"> — </span><span class="author">{book.data.author}</span></div>
+            {section.status === 'read' && book.data.rating != null && <p class="rating" aria-label={`My rating: ${ratingLabel(book.data.rating)}`}><span aria-hidden="true">{ratingStars(book.data.rating)}</span> <span class="rating-number">{ratingLabel(book.data.rating)}</span></p>}
+            {book.data.impression && <p class="impression">{book.data.impression}</p>}
+          </li>)}
+        </ul> : <p class="empty">No books here yet.</p>}
+      </section>;
+    })}
+  </div>
+</BaseLayout>
+<style>
+  .reading-page { max-width: 780px; padding-block: 3rem 5rem; }
+  h1 { font-size: clamp(2rem, 4vw, 2.5rem); line-height: 1.15; margin: 0 0 .75rem; }
+  .intro { color: var(--text-muted, #646a63); margin: 0 0 2.5rem; line-height: 1.6; }
+  .book-section { margin: 0 0 2rem; }
+  .book-section h2 { font-size: clamp(1.35rem, 2.7vw, 1.65rem); padding: .8rem 1rem; margin: 0; border-radius: 5px 5px 0 0; color: #26392c; }
+  .sage h2 { background: #e3ebe0; }
+  .blue h2 { background: #e7edf0; }
+  .cream h2 { background: #f1eadc; }
+  .book-list { list-style: none; padding: 0; margin: 0; }
+  .book-item { padding: 1rem .6rem; border-bottom: 1px solid #dce1da; }
+  .book-heading { line-height: 1.55; overflow-wrap: anywhere; }
+  .book-heading cite { font-style: italic; font-weight: 600; }
+  .author { color: var(--text-muted, #58635c); }
+  .rating { margin: .4rem 0 .3rem; color: #42664c; letter-spacing: .035em; }
+  .rating-number { font-size: .88rem; letter-spacing: 0; margin-left: .4rem; }
+  .impression { margin: .4rem 0 0; line-height: 1.6; color: var(--text-muted, #58635c); }
+  .empty { padding: 1rem .6rem; color: var(--text-muted, #58635c); }
+  @media (max-width: 520px) { .reading-page { padding-block: 2rem 3rem; } .book-item { padding-inline: .25rem; } }
+</style>
