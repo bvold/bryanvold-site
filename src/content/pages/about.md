@@ -1,13 +1,12 @@
 ---
-title: "About"
+title: About
 ---
+I'm **Bryan Vold**, a writer based in Waxahachie, Texas, just south of Dallas.
 
-I'm Bryan Vold, a writer based in Waxahachie, Texas, just south of Dallas.
+This website is a home for sharing ideas and the things that I'm learning along the way.
 
-I'm working on my first novel, a work of speculative Christian fiction. I'm interested in stories that ask meaningful questions, explore what people believe, and leave room for discovery.
+I'm working on my first novel, a work of speculative Christian fiction. No title, a vague idea of a setting and topics I want to explore.  I don't know how I got here...  I started journaling and then the next thing I know, I'm buying notebooks, pens and buying *craft books.  "Jane, stop this crazy thing!"*
 
-This website is a home for my writing as it develops: ideas, observations, lessons from the writing process, and the occasional update on what I'm building or exploring.
-
-I'm working on making writing, reading, and journaling part of everyday life. It's a work in progress—much like this website—and that's part of why I'm sharing it.
+I'm working on making reading, writing, and journaling part of my life.  The ***writing life*** is a constant adjustment process; it doesn't come all baked and ready to eat.  I didn't understand the ebb and flow of interest and internal struggle that some of the craft books were talking about, but I've started to experience it a bit, and I haven't even really begun to write in earnest.  And here's the thing — I specifically wrote in my journal — "*There's absolutely no pressure, because I'm not planning to make money with this; it's only to discover."*  Yeah, right.  How do I convince my brain what I said in my journal?!??
 
 If you're curious about what I'm focused on right now, visit my [Now](/now/) page. For the tools and everyday essentials I use, see [Uses](/uses/).
