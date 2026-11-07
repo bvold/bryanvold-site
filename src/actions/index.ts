@@ -91,7 +91,13 @@ export const server = {
           ].join("\n"),
         });
       } catch (err) {
-        console.error("Contact form email failed:", err);
+        // Log fields explicitly; Workers Logs may show only the stack otherwise.
+        const e = err as { name?: string; message?: string; code?: string };
+        console.error(
+          `Contact form email failed: ${e?.name ?? "Error"}` +
+            ` code=${e?.code ?? "n/a"} message=${e?.message ?? String(err)}` +
+            ` to=${env.CONTACT_TO ? "set" : "MISSING"}`,
+        );
         throw new ActionError({
           code: "INTERNAL_SERVER_ERROR",
           message:
