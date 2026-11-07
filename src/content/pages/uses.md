@@ -1,5 +1,6 @@
 ---
 title: "Uses"
+description: "The digital tools, analog notebooks and pens, and little comforts in Bryan Vold's everyday writing setup."
 ---
 
 The digital tools, analog essentials, and little comforts that make up my everyday writing setup.

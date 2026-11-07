@@ -1,5 +1,6 @@
 ---
 title: Now
+description: "What Bryan Vold is writing, reading, listening to, and thinking about lately."
 ---
 A snapshot of what I'm writing, reading, listening to, and thinking about lately.
 

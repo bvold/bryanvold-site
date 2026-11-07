@@ -20,7 +20,7 @@ const turnstileSiteKey = import.meta.env.DEV
 
 <BaseLayout
   title={page.data.title}
-  description="Get in touch with Bryan Vold."
+  description={page.data.description ?? "Get in touch with Bryan Vold."}
 >
   <section class="page">
     <PageHeader title={page.data.title} />

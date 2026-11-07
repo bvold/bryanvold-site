@@ -1,5 +1,6 @@
 ---
 title: About
+description: "Bryan Vold is a writer in Waxahachie, Texas, working on his first novel, a work of speculative Christian fiction."
 ---
 I'm **Bryan Vold**, a writer based in Waxahachie, Texas, just south of Dallas.
 

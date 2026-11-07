@@ -12,7 +12,7 @@ const sections = [
 const ratingLabel = (rating: number) => `${rating.toFixed(1).replace(/\.0$/, '')} / 5`;
 const ratingStars = (rating: number) => '★'.repeat(Math.floor(rating)) + (rating % 1 >= .5 ? '½' : '') + '☆'.repeat(5 - Math.ceil(rating));
 ---
-<BaseLayout title="Reading List">
+<BaseLayout title="Reading List" description="Books Bryan Vold is reading, wants to read, and has read, with a few impressions along the way.">
   <div class="page">
     <PageHeader
       title="Reading List"

@@ -1,17 +1,49 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { siteConfig } from "../config/site";
 import "../styles/global.css";
 
 interface Props {
-  title: string;
+  /** Page name. Omit on the home page to use "Bryan Vold | tagline". */
+  title?: string;
   description?: string;
+  /** Share image path or URL; falls back to the default site card. */
+  image?: string;
+  imageAlt?: string;
+  /** "article" for blog posts; "website" otherwise. */
+  type?: "website" | "article";
+  publishedTime?: Date;
 }
 
 const {
   title,
-  description = "The personal website of Bryan Vold",
+  description = siteConfig.description,
+  image,
+  imageAlt,
+  type = "website",
+  publishedTime,
 } = Astro.props;
+
+const fullTitle = title
+  ? `${title} | ${siteConfig.name}`
+  : `${siteConfig.name} | ${siteConfig.tagline}`;
+
+// Posts share under their own title; other pages include the site name.
+const shareTitle = type === "article" && title ? title : fullTitle;
+
+const site = Astro.site ?? new URL("https://bryanvold.com");
+const canonicalURL = new URL(Astro.url.pathname, site);
+
+const DEFAULT_IMAGE = {
+  src: "/og-default.png",
+  alt: `${siteConfig.name}: ${siteConfig.tagline}`,
+  width: 1200,
+  height: 630,
+};
+const usingDefaultImage = !image;
+const imageURL = new URL(image ?? DEFAULT_IMAGE.src, site);
+const imageAltText = image ? (imageAlt ?? title ?? siteConfig.name) : DEFAULT_IMAGE.alt;
 ---
 
 <!doctype html>
@@ -24,9 +56,41 @@ const {
       content="width=device-width, initial-scale=1"
     />
 
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.name} />
+    <link rel="canonical" href={canonicalURL} />
 
-    <title>{title} | Bryan Vold</title>
+    <!-- Social sharing (Facebook, LinkedIn, iMessage, Slack, etc.) -->
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={shareTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:image:alt" content={imageAltText} />
+    {usingDefaultImage && (
+      <>
+        <meta property="og:image:width" content={String(DEFAULT_IMAGE.width)} />
+        <meta property="og:image:height" content={String(DEFAULT_IMAGE.height)} />
+        <meta property="og:image:type" content="image/png" />
+      </>
+    )}
+    {type === "article" && publishedTime && (
+      <>
+        <meta property="article:published_time" content={publishedTime.toISOString()} />
+        <meta property="article:author" content={siteConfig.name} />
+      </>
+    )}
+
+    <!-- X / Twitter, Bluesky and others that read Twitter cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={shareTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
+    <meta name="twitter:image:alt" content={imageAltText} />
+
     <!-- Pagefind Component UI -->
     <link
       rel="stylesheet"
