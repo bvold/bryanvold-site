@@ -108,9 +108,10 @@ collections:
             widget: "text"
             required: false
             hint: "One or two sentences shown in search results and social-media link previews."
-          - label: "Body"
+          - label: "Intro Text"
             name: "body"
             widget: "markdown"
+            hint: "Shown under the page title, above the book lists. Books themselves are edited under Reading List Books."
   - name: "blog"
     label: "Blog Posts"
     folder: "src/content/blog"

@@ -1,7 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
+
+const page = await getEntry('pages', 'reading-list');
+if (!page) {
+  throw new Error('Content not found: reading-list.md');
+}
+const { Content } = await render(page);
 
 const books = await getCollection('books');
 const sections = [
@@ -12,12 +18,11 @@ const sections = [
 const ratingLabel = (rating: number) => `${rating.toFixed(1).replace(/\.0$/, '')} / 5`;
 const ratingStars = (rating: number) => '★'.repeat(Math.floor(rating)) + (rating % 1 >= .5 ? '½' : '') + '☆'.repeat(5 - Math.ceil(rating));
 ---
-<BaseLayout title="Reading List" description="Books Bryan Vold is reading, wants to read, and has read, with a few impressions along the way.">
+<BaseLayout title={page.data.title} description={page.data.description}>
   <div class="page">
-    <PageHeader
-      title="Reading List"
-      lead="A running record of books I’m reading, books on my radar, and a few impressions along the way."
-    />
+    <PageHeader title={page.data.title}>
+      <div class="lead intro"><Content /></div>
+    </PageHeader>
     {sections.map(section => {
       const items = books.filter(book => book.data.status === section.status)
         .sort((a,b) => (a.data.order ?? 999) - (b.data.order ?? 999) || a.data.title.localeCompare(b.data.title));
@@ -35,6 +40,9 @@ const ratingStars = (rating: number) => '★'.repeat(Math.floor(rating)) + (rati
   </div>
 </BaseLayout>
 <style>
+  .intro { margin-top: .75rem; }
+  .intro :global(p) { margin: 0 0 .75rem; }
+  .intro :global(p:last-child) { margin-bottom: 0; }
   .book-section { margin: 0 0 2.5rem; }
   .book-section h2 { padding: .75rem 1rem; margin: 0; border-radius: 5px 5px 0 0; color: var(--color-forest); }
   .sage h2 { background: #e3ebe0; }
