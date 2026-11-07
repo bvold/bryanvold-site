@@ -64,6 +64,18 @@ collections:
           - label: "Body"
             name: "body"
             widget: "markdown"
+      - name: "contact"
+        label: "Contact Page"
+        file: "src/content/pages/contact.md"
+        fields:
+          - label: "Title"
+            name: "title"
+            widget: "string"
+
+          - label: "Intro Text"
+            name: "body"
+            widget: "markdown"
+            hint: "Shown above the contact form."
       - name: "reading-list"
         label: "Reading List"
         file: "src/content/pages/reading-list.md"

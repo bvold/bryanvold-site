@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # wranger build
 .wrangler/
+
+# local Cloudflare secrets
+.dev.vars*

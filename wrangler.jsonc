@@ -8,6 +8,15 @@
 		"directory": "./dist",
 		"binding": "ASSETS"
 	},
+	// Contact form email. Messages are sent from website@bryanvold.com to the
+	// CONTACT_TO secret. TURNSTILE_SECRET_KEY is also a secret (see .dev.vars
+	// for local values; set production values with `wrangler secret put`).
+	"send_email": [
+		{
+			"name": "SEND_EMAIL",
+			"allowed_sender_addresses": ["website@bryanvold.com"]
+		}
+	],
 	"observability": {
 		"enabled": true
 	}
