@@ -7,7 +7,7 @@ export const siteConfig = {
     "The personal website and writing journal of Bryan Vold.",
 
   features: {
-    showBooks: true,
+    showBooks: false, // set to true to show "My Books"
   },
 
   social: {
