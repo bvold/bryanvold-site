@@ -11,7 +11,7 @@ homepage:
     <b>Proverbs 16:9</b> </i>
 
 features:
-  showBooks: true
+  showBooks: false
 
 social:
   instagram: "https://www.instagram.com/bryanvold/"
