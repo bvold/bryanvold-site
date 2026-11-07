@@ -15,6 +15,16 @@
 </div>
 
 <style>
+  /*
+   * Pagefind's trigger is a <button>, which doesn't inherit the page font,
+   * and Pagefind hard-codes its size. Match the other menu links.
+   */
+  .search-modal-container :global(.pf-trigger-btn) {
+    font-family: var(--font-body) !important;
+    font-size: var(--text-base) !important;
+    padding-inline: 0 !important;
+  }
+
   .search-modal-container {
     display: flex;
     align-items: center;

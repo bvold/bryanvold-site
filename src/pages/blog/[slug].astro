@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { formatDate } from "../../utils/format";
 
 import {
   getCollection,
@@ -31,27 +33,15 @@ const { Content } = await render(post);
   title={post.data.title}
   description={post.data.description}
 >
-  <article class="article" data-pagefind-body>
+  <article class="page" data-pagefind-body>
 
-    <header>
-      <p class="category">
-        {post.data.category}
+    <PageHeader title={post.data.title} eyebrow={post.data.category}>
+      <p class="meta">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {formatDate(post.data.pubDate)}
+        </time>
       </p>
-
-      <h1>{post.data.title}</h1>
-
-      <time datetime={post.data.pubDate.toISOString()}>
-        {post.data.pubDate.toLocaleDateString(
-          "en-US",
-          {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            timeZone: "UTC",
-          }
-        )}
-      </time>
-    </header>
+    </PageHeader>
 
     {post.data.image && (
       <img
@@ -61,38 +51,26 @@ const { Content } = await render(post);
       />
     )}
 
-    <div class="article-body">
+    <div class="prose">
       <Content />
     </div>
+
+    <p class="back">
+      <a class="read-more" href="/blog/">← Back to all posts</a>
+    </p>
 
   </article>
 </BaseLayout>
 
 <style>
-  .article {
-    max-width: var(--article-width);
-    margin: 4rem auto;
-    padding: 0 1rem;
-  }
-
-  .category {
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-size: 0.8rem;
-  }
-
   .featured-image {
     width: 100%;
-    margin: 2rem 0;
+    margin: 0 0 2.5rem;
   }
 
-  .article-body {
-    margin-top: 3rem;
-    font-size: 1.15rem;
-    line-height: 1.85;
-  }
-
-  .article-body :global(p) {
-    margin-bottom: 1.5rem;
+  .back {
+    margin: 3rem 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
   }
 </style>

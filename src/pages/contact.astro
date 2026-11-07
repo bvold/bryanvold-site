@@ -2,6 +2,7 @@
 import { getEntry, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteConfig } from "../config/site";
+import PageHeader from "../components/PageHeader.astro";
 
 const page = await getEntry("pages", "contact");
 
@@ -21,10 +22,10 @@ const turnstileSiteKey = import.meta.env.DEV
   title={page.data.title}
   description="Get in touch with Bryan Vold."
 >
-  <section class="container contact-page">
-    <h1>{page.data.title}</h1>
+  <section class="page">
+    <PageHeader title={page.data.title} />
 
-    <div class="intro">
+    <div class="prose intro">
       <Content />
     </div>
 
@@ -63,7 +64,7 @@ const turnstileSiteKey = import.meta.env.DEV
         <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
       </div>
 
-      <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
+      <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light" data-appearance="interaction-only"></div>
       <p class="field-error" data-error-for="cf-turnstile-response" aria-live="polite"></p>
 
       <button type="submit" class="button">Send Message</button>
@@ -148,11 +149,6 @@ const turnstileSiteKey = import.meta.env.DEV
 </script>
 
 <style>
-  .contact-page {
-    max-width: 720px;
-    padding-block: 4rem;
-  }
-
   .intro {
     margin-bottom: 2.5rem;
   }
@@ -177,7 +173,6 @@ const turnstileSiteKey = import.meta.env.DEV
   textarea {
     width: 100%;
     font: inherit;
-    font-size: 1rem;
     color: var(--color-text);
     background: var(--color-white);
     border: 1px solid #c9cbc2;
@@ -205,7 +200,7 @@ const turnstileSiteKey = import.meta.env.DEV
   .field-error,
   .form-status.is-error {
     color: #a33a2b;
-    font-size: 0.95rem;
+    font-size: var(--text-sm);
     margin: 0;
   }
 

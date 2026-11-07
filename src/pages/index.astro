@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { formatDate } from "../utils/format";
 
 const posts = (
   await getCollection("blog", ({ data }) => !data.draft)
@@ -15,22 +16,19 @@ const posts = (
 
 <BaseLayout title="Home">
 
-  <section class="welcome container">
+  <section class="welcome container page-wide">
+    <p class="eyebrow">Welcome</p>
 
-    <p class="eyebrow">WELCOME</p>
+    <h1>Random thoughts on writing, discovery and observations.</h1>
 
-    <h2>Random thoughts on writing, discovery and observations.</h2>
-
-    <p>
-    <i>The heart of man plans his way,
-    but the Lord establishes his steps.<nbsp/>
-    <b>Proverbs 16:9</b> </i>
-    </p>
+    <blockquote class="verse">
+      <p>The heart of man plans his way, but the Lord establishes his steps.</p>
+      <cite>Proverbs 16:9</cite>
+    </blockquote>
 
     <a class="button" href="/blog/">
       Read the Blog →
     </a>
-
   </section>
 
   <section class="recent container">
@@ -38,7 +36,7 @@ const posts = (
     <div class="section-heading">
       <h2>Latest Articles</h2>
 
-      <a href="/blog/">
+      <a class="read-more" href="/blog/">
         View All Posts →
       </a>
     </div>
@@ -55,22 +53,23 @@ const posts = (
             />
           )}
 
-          <p class="date">
-            {post.data.pubDate.toLocaleDateString(
-              "en-US",
-              { timeZone: "UTC" }
-            )}
-          </p>
+          <p class="eyebrow">{post.data.category}</p>
 
-          <h3>
+          <h3 class="post-title">
             <a href={`/blog/${post.id}/`}>
               {post.data.title}
             </a>
           </h3>
 
-          <p>{post.data.description}</p>
+          <p class="meta">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formatDate(post.data.pubDate)}
+            </time>
+          </p>
 
-          <a href={`/blog/${post.id}/`}>
+          <p class="description">{post.data.description}</p>
+
+          <a class="read-more" href={`/blog/${post.id}/`}>
             Read More →
           </a>
 
@@ -84,30 +83,36 @@ const posts = (
 
 <style>
   .welcome {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-bottom: 4rem;
   }
 
   .welcome h1 {
-    max-width: 650px;
+    max-width: 18em;
+    margin: 0;
   }
 
-  .welcome > p:not(.eyebrow) {
-    max-width: 600px;
-    font-size: 1.25rem;
+  .verse {
+    max-width: 34em;
+    margin: 1.75rem 0 2rem;
+    padding-left: 1.25rem;
+    border-left: 3px solid var(--color-border);
   }
 
-  /* .eyebrow {
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-  } */
+  .verse p {
+    margin: 0;
+    font-size: var(--text-lead);
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--color-muted);
+  }
 
-  .eyebrow {
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    line-height: 1.4;
+  .verse cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: var(--text-sm);
+    font-style: normal;
+    letter-spacing: 0.05em;
+    color: var(--color-forest);
   }
 
   .button {
@@ -115,42 +120,51 @@ const posts = (
     padding: 0.8rem 1.5rem;
     border: 1px solid var(--color-forest);
     text-decoration: none;
-    margin-top: 1rem;
+    color: var(--color-forest);
+  }
+
+  .button:hover,
+  .button:focus-visible {
+    background: var(--color-forest);
+    color: var(--color-cream);
   }
 
   .recent {
-    padding-bottom: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--color-border);
   }
 
   .section-heading {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-heading h2 {
+    margin: 0;
   }
 
   .article-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
-  .article-grid article img {
+  .article-grid img {
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
+    margin-bottom: 1rem;
   }
 
-  .article-grid article h3 {
-    font-size: 1.5rem;
+  .article-grid .meta {
+    margin: 0 0 0.75rem;
   }
 
-  .article-grid article h3 a {
-    text-decoration: none;
-  }
-
-  .date {
-    font-size: 0.8rem;
-    color: var(--color-muted);
+  .description {
+    margin: 0 0 0.75rem;
   }
 
   @media (max-width: 800px) {
@@ -159,7 +173,6 @@ const posts = (
     }
 
     .welcome {
-      padding-top: 3rem;
       padding-bottom: 3rem;
     }
   }

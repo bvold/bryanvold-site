@@ -14,9 +14,31 @@
   --font-heading: Georgia, "Times New Roman", serif;
   --font-body: Georgia, "Times New Roman", serif;
 
+  /*
+   * Type scale: use these instead of one-off sizes.
+   * label  – small capitals (WELCOME, categories)
+   * sm     – dates, captions, footer, form hints
+   * base   – all reading text
+   * lead   – page intros
+   * h3/h2/h1 – headings
+   */
+  --text-label: 0.8rem;
+  --text-sm: 0.95rem;
+  --text-base: 1.125rem;
+  --text-lead: 1.3rem;
+  --text-h3: 1.45rem;
+  --text-h2: clamp(1.5rem, 1.25rem + 0.9vw, 1.75rem);
+  --text-h1: clamp(2rem, 1.6rem + 1.6vw, 2.5rem);
+
+  --leading-body: 1.75;
+  --leading-heading: 1.2;
+  --tracking-label: 0.15em;
+
   /* Layout */
   --content-width: 1120px;
-  --article-width: 720px;
+  --reading-width: 720px;
+  --article-width: var(--reading-width);
+  --page-top: clamp(2.5rem, 5vw, 4rem);
 
   /* Spacing */
   --space-sm: 0.75rem;
@@ -25,17 +47,31 @@
   --space-xl: 5rem;
 }
 
+/* Pagefind search box and results use the site font too. */
+:root {
+  --pf-font: var(--font-body);
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   background: var(--color-white);
   color: var(--color-text);
   font-family: var(--font-body);
-  font-size: 1.1rem;
-  line-height: 1.7;
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+}
+
+/* Keep the footer at the bottom of the window on short pages. */
+main {
+  flex: 1;
 }
 
 a {
@@ -47,26 +83,123 @@ img {
   height: auto;
 }
 
+/* ---------- Layout ---------- */
+
 .container {
-  width: min(
-    calc(100% - 2rem),
-    var(--content-width)
-  );
+  width: min(calc(100% - 2rem), var(--content-width));
   margin-inline: auto;
 }
+
+/* Single-column reading pages (About, posts, Contact, …). */
+.page {
+  width: min(calc(100% - 2rem), var(--reading-width));
+  margin-inline: auto;
+  padding-top: var(--page-top);
+}
+
+/* Wide list pages (Home, Blog) use the full container width. */
+.page-wide {
+  padding-top: var(--page-top);
+}
+
+/* ---------- Headings ---------- */
 
 h1,
 h2,
 h3 {
   font-family: var(--font-heading);
   font-weight: 400;
-  line-height: 1.2;
+  line-height: var(--leading-heading);
+  margin: 0 0 0.5em;
 }
 
 h1 {
-  font-size: clamp(1.85rem, 2.6vw, 2.25rem);
+  font-size: var(--text-h1);
 }
 
 h2 {
-  font-size: clamp(1.4rem, 2vw, 1.625rem);
+  font-size: var(--text-h2);
+  margin-top: 1.75em;
+}
+
+h3 {
+  font-size: var(--text-h3);
+  margin-top: 1.5em;
+}
+
+/* ---------- Shared text styles ---------- */
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-forest);
+  line-height: 1.4;
+}
+
+.lead {
+  font-size: var(--text-lead);
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+.meta {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+/* Page title block shared by every page. */
+.page-header {
+  margin-bottom: 2.5rem;
+}
+
+.page-header h1 {
+  margin: 0;
+}
+
+.page-header .lead {
+  margin: 0.75rem 0 0;
+}
+
+.page-header .meta {
+  margin: 0.75rem 0 0;
+}
+
+/* Long-form text from Markdown. */
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote {
+  margin: 0 0 1.25em;
+}
+
+.prose blockquote {
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--color-border);
+  font-style: italic;
+}
+
+/* Post titles in lists (Home, Blog). */
+.post-title {
+  font-size: var(--text-h3);
+  margin: 0 0 0.35rem;
+}
+
+.post-title a {
+  text-decoration: none;
+}
+
+.post-title a:hover,
+.post-title a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.read-more {
+  font-size: var(--text-sm);
 }

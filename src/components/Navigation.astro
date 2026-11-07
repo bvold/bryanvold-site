@@ -39,16 +39,16 @@ const links = navigation.filter(
     color: var(--color-cream);
   }
 
+  /* Same width as .container so links line up with page content. */
   .nav-inner {
-    max-width: 1120px;
-    margin: auto;
-    padding: 0.8rem 1rem;
+    width: min(calc(100% - 2rem), var(--content-width));
+    margin-inline: auto;
+    padding: 0.8rem 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 100%;
   }
 
   .desktop-links {

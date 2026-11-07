@@ -1,31 +1,21 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
 ---
 
 <BaseLayout
   title="Search"
   description="Search the writing and articles of Bryan Vold."
 >
+  <section class="page">
 
-  <section class="search-page container">
-
-    <header class="search-header">
-
-      <p class="eyebrow">
-        EXPLORE THE JOURNAL
-      </p>
-
-      <h1>Search</h1>
-
-      <p class="introduction">
-        Search through my articles, observations,
-        and reflections.
-      </p>
-
-    </header>
+    <PageHeader
+      title="Search"
+      eyebrow="Explore the Journal"
+      lead="Search through my articles, observations, and reflections."
+    />
 
     <div class="search-interface">
-
       <pagefind-input
         instance="full-page"
         placeholder="What are you looking for?"
@@ -38,41 +28,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <pagefind-results
         instance="full-page"
       ></pagefind-results>
-
     </div>
 
   </section>
-
 </BaseLayout>
 
 <style>
-  .search-page {
-    max-width: 850px;
-    padding-top: 4rem;
-    padding-bottom: 6rem;
-  }
-
-  .search-header {
-    margin-bottom: 3rem;
-  }
-
-  .eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    color: var(--color-forest);
-  }
-
-  .search-header h1 {
-    margin: 0.5rem 0 1rem;
-    color: var(--color-forest);
-  }
-
-  .introduction {
-    font-size: 1.15rem;
-    color: var(--color-muted);
-    max-width: 600px;
-  }
-
   .search-interface {
     padding-top: 2rem;
     border-top: 1px solid var(--color-border);
